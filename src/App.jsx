@@ -1,45 +1,23 @@
-import { useState } from 'react'
-import logo from './logo.svg'
-import './App.css'
+import Weather from "./components/Weather";
+import Header from "./components/Header";
+import { useSelector } from "react-redux";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const isApiGet = useSelector((state) => state.weather.isApiGet);
 
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>Hello Vite + React!</p>
-        <p>
-          <button type="button" onClick={() => setCount((count) => count + 1)}>
-            count is: {count}
-          </button>
-        </p>
-        <p>
-          Edit <code>App.jsx</code> and save to test HMR updates.
-        </p>
-        <p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-          {' | '}
-          <a
-            className="App-link"
-            href="https://vitejs.dev/guide/features.html"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Vite Docs
-          </a>
-        </p>
-      </header>
+    <div className="bg-teal-300 flex items-center justify-center w-screen h-screen py-10">
+      <div className="">
+        {isApiGet ? (
+          <Weather />
+        ) : (
+          <div className="flex h-[240px] p-4 rounded-3xl shadow-2xl m-auto bg-gray-200 bg-opacity-96">
+            <Header />
+          </div>
+        )}
+      </div>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
