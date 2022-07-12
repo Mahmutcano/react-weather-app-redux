@@ -1,8 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
 import weatherSlice from "./weatherSlice";
+import auth from './authSlice'
 
-export const store = configureStore({
+const store = configureStore({
     reducer: {
         weather: weatherSlice,
+        auth
     },
 });
+
+export default store

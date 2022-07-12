@@ -4,9 +4,11 @@ import Content from "./Content";
 import Loading from "./Loading";
 
 function Weather() {
+  // Redux 
   const items = useSelector((state) => state.weather.items);
   const status = useSelector((state) => state.weather.status);
 
+  // İnitialState Redux 
   const list = items.list;
 
   const newList = [];
@@ -17,10 +19,9 @@ function Weather() {
 
   return (
     <>
-      <div className="flex m-0 mb-20 bg-orange-200 rounded-full p-2 text-center justify-center text-black uppercase font-bold">
-        <h1>Weekly Weather Forecast</h1>
+      <div className="rounded-full text-center items-center justify-center text-black uppercase font-bold">
       </div>
-      <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-5 items-center mx-auto gap-12">
+      <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-5 items-center mx-auto gap-12 pt-20">
         {status === "loading" ? (
           <Loading />
         ) : (

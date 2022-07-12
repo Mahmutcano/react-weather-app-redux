@@ -1,5 +1,6 @@
 import { createSlice,createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import toast from "react-hot-toast";
 
 // Fetch Api Data 
 export const fetchWeather = createAsyncThunk('weather/getweather',async(city) => {
@@ -22,11 +23,12 @@ export const weatherSlice = createSlice({
         [fetchWeather.fulfilled]: (state, action) => {
             state.items = action.payload;
             state.status = "successed";
+            toast.success('City Found')
             state.isApiGet = true;
         },
         [fetchWeather.rejected]: (state, action) => {
             state.status = "failed";
-            state.error = action.error.message;
+            toast.error('City Not Found');
         },
     },
 });
