@@ -28,6 +28,7 @@ const Home = () => {
   };
 
   const isApiGet = useSelector((state) => state.weather.isApiGet);
+  
   // Rendering Page Components
   if (user) {
     return (

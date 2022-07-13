@@ -1,22 +1,30 @@
 import React from "react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { update, auth } from "../firebase";
 import { fetchWeather } from "../redux/weatherSlice";
 import Error from "./Error";
 
 function Header() {
-  const [city, setCity] = useState("");
+  // Redux and Firebase Entegrasyon
+  const {user} = useSelector(state => state.auth)
+  const [displayName, setDisplayName] = useState(user.displayName || '')
 
   const dispatch = useDispatch();
 
+  // Redux State Managament
   const status = useSelector((state) => state.weather.status);
   const error = useSelector((state) => state.weather.error);
 
-  const handleSubmit = (e) => {
+  // Cityname Submit && Firebase Update Method
+  const handleSubmit = async (e) => {
     e.preventDefault();
-
-    dispatch(fetchWeather(city));
-    setCity("");
+    await update({
+      displayName
+    })
+    dispatch(fetchWeather(displayName));
+    setDisplayName("");
+    console.log(auth.currentUser);
   };
   if (status === "failed") {
     return <Error message={error} />;
@@ -30,8 +38,9 @@ function Header() {
             className="appearance-none text-teal-800 bg-transparent border-none w-full mr-3 py-1 px-2 leading-tight focus:outline-none placeholder-teal-600"
             type="text"
             placeholder="Search for a city"
-            onChange={(e) => setCity(e.target.value)}
+            onChange={(e) => setDisplayName(e.target.value)}
             aria-label="Full name"
+            value={displayName}
           />
           <button
             className="flex-shrink-0 bg-teal-500 hover:bg-teal-700 border-teal-500 hover:border-teal-700 text-sm border-4 text-white py-1 px-2 rounded"

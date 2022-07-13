@@ -3,17 +3,19 @@ import { useSelector } from 'react-redux';
 
 function Content({wt}) {
 
+    // Fetch Data Day Operations
     let day = wt.dt_txt.slice(0,10);
     let descp= wt.weather[0].description;
     let tempMax= wt.main.temp_max;
     let tempMin= wt.main.temp_min;
     let icon = wt.weather[0].icon;
     
+    // Redux State Managament
     const items = useSelector((state) => state.weather.items);
     const cityName = items.city.name;
     const country = items.city.country;
     
-
+    // İnactive
     let days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
     let d = new Date(day);
     let dayName = days[d.getDay()];

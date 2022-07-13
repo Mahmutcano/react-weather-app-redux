@@ -4,11 +4,11 @@ import Content from "./Content";
 import Loading from "./Loading";
 
 function Weather() {
-  // Redux 
+  // Redux State Managament
   const items = useSelector((state) => state.weather.items);
   const status = useSelector((state) => state.weather.status);
 
-  // İnitialState Redux 
+  // İnitialState Redux && Fetch Api Array Operations
   const list = items.list;
 
   const newList = [];
